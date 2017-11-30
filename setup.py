@@ -48,7 +48,8 @@ if '--maven' in sys.argv:
     do_maven = True
     sys.argv.remove('--maven')
 elif 'install' in sys.argv:
-    do_maven = True
+    # do_maven = True
+    print('Note that you are install with not on maven')
 else:
     print('Note that you can use non-standard global option [--maven] '
           'to force a Java Maven build for the jpy Java API')
@@ -149,6 +150,8 @@ def _build_dir():
     return os.path.join('build', 'lib' + plat)
 
 def package_maven():
+    if not do_maven:
+        return
     """ Run maven package lifecycle """
     if not os.getenv('JAVA_HOME'):
         # make sure Maven uses the same JDK which we have used to compile
